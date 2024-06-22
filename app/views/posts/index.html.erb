@@ -1,0 +1,12 @@
+<h1>All Posts</h1>
+<% @post.each do |post| %>
+  <div>
+    <p><%= link_to post_path(post) do %>
+      <%= image_tag post.get_image %>
+    <% end %></p>
+    <p>User name：<%= post.user.name %></p>
+    <p>Genre：<%= post.genre %></p>
+    <p>Title：<%= post.title %></p>
+    <p>Caption：<%= post.body %></p>
+  </div>
+<% end %>

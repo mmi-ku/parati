@@ -1,0 +1,31 @@
+
+<h1>My Page</h1>
+
+<div>
+  <%= flash[:notice] %>
+</div>
+
+<div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100,100) %>
+
+  <% if @user == current_user %>
+       <%= link_to "Edit Profile", edit_user_path(@user) %>
+  <% end %>
+</div>     
+
+
+<h2>Posts</h2>
+  <div>
+  <%= flash[:notice] %>
+  </div>
+<% @posts.each do |post| %>
+  <div>
+    <p><%= link_to post_path(post) do %>
+      <%= image_tag post.get_image %>
+    <% end %></p>
+    <p>Genre: <%= post.genre %></p>
+    <p>Title: <%= post.title %></p>
+    <p>Caption: <%= post.body %></p>
+  </div>
+<% end %>
