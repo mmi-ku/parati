@@ -1,9 +1,10 @@
 class Post < ApplicationRecord
   has_one_attached :image
   belongs_to :user
+  belongs_to :genre, optional: true
+  
   
   validates :image, presence: true
-  validates :genre, presence: true
   validates :title, presence: true
   validates :body, presence: true
   

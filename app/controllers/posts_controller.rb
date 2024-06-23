@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
+  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :set_genre, only: [:index, :new, :edit, :create, :update]
+  
   def new
     @post = Post.new
   end
   
   def create
+    #byebug
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
@@ -44,9 +48,17 @@ class PostsController < ApplicationController
   end
   
   private
+    def set_post
+      @post = Post.find(params[:id])
+    end
 
-  def post_params
-    params.require(:post).permit(:image, :genre, :title, :body)
-  end
+    def set_genre
+      @genres = Genre.all
+    end
+  
+
+    def post_params
+      params.require(:post).permit(:image, :genre_id, :title, :body)
+    end
   
 end

@@ -5,8 +5,15 @@
       <%= image_tag post.get_image %>
     <% end %></p>
     <p>User name：<%= post.user.name %></p>
-    <p>Genre：<%= post.genre %></p>
+    <p><%= post.genre.name if post.genre.present? %></p>
     <p>Title：<%= post.title %></p>
+    
+    <% if post.genre %>
+    <p>Genre: <%= post.genre.name %></p>
+    <% else %>
+      <p>Genre: No genre assigned</p> 
+    <% end %>
+    
     <p>Caption：<%= post.body %></p>
   </div>
 <% end %>

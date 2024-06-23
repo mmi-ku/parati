@@ -13,8 +13,15 @@
 
   <h4>Picture</h4>
   <%= f.file_field :image, accept: "image/*" %>
+  
   <h4>Genre</h4>
-  <%= f.text_field :genre %>
+    <%= form_with(model: @post, local: true) do |form| %>
+      <div class="field">
+         <%= form.label :genre %>
+         <%= form.collection_select :genre_id, @genres, :id, :name, {include_blank: "---"} %>
+      </div>
+    <% end %>
+  
   <h4>Title</h4>
   <%= f.text_field :title %>
   <h4>Caption</h4>
@@ -23,3 +30,9 @@
   <%= f.submit 'save' %>
   
 <% end %>
+
+<div>
+  <%= link_to "Show", post_path(@post) %>
+　<%= link_to "Back", posts_path %>
+</div>
+ 　
