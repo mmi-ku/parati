@@ -23,10 +23,15 @@
                 <%= f.submit "Search", class: "btn btn-primary" %>
               <% end %>
             </div>
-        </li>
+        
         <li>
           <%= link_to 'Post', new_post_path %>
         </li>
+        
+        <li>
+          <%= link_to 'Home', posts_path%>    
+        </li>
+        
         <li>
           <%= link_to 'My Page', user_path(current_user.id) %>    
         </li>

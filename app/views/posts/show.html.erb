@@ -3,6 +3,8 @@
   </div>
 
   <div>
+    <p>User name：<%= @post.user.name %></p>
+    <%= image_tag @post.user.get_profile_image(100, 100) %>
     <% if @post.genre %>
     <p>Genre: <%= @post.genre.name %></p>
     <% else %>

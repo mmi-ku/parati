@@ -10,7 +10,8 @@ class SearchesController < ApplicationController
         @posts = Post.looks(params[:search], params[:word])
     elsif @range == "Genre"
         @genres = Genre.looks(params[:search], params[:word])
+        @posts = Post.where(genre_id: @genres.pluck(:id))
     end
- end
+  end
 
 end

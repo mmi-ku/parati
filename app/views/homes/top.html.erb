@@ -1,11 +1,25 @@
-<h1>ParaTi</h1>
+<h1>Welcome to ParaTi</h1>
 <p>Shere your ideas! Get inspirations!</p>
 
-これをヘッダーにする
-sign in here 
-Log in here
-ボタン
-log ing as guest 
 
-新着投稿一覧
+以下、新規登録を左側に入れる
+        <h1>
+          Welcome to
+          <i class="fa-solid fa-book"></i>
+          <strong>ParaTI</strong>
+          !!
+        </h1>
+
+        <p>Shere your ideas! Get inspirations!</p>
+
+        <div class="btn-wrapper col-10 mx-auto">
+
+            <%= link_to "Log in", new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" %>
+
+            <%= link_to "Sign up", new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" %>
+
+        </div>
+
+中心は投稿一覧。
+
 
