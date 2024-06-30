@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
 
   root to: "homes#top"
-  devise_for :users
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   resources :users, only: [:show, :index, :edit, :update]
   resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
@@ -13,5 +17,8 @@ Rails.application.routes.draw do
   get 'home/about', to: 'homes#about', as: 'about'
 
   get "search" => "searches#search"
+
+  patch 'withdraw/:id' => 'users#withdraw', as: 'withdraw_user'
+  put 'withdraw/:id' => 'users#withdraw'
 
 end

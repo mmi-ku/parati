@@ -8,3 +8,5 @@
   <%= f.file_field :image, placeholder: "Profile Picture", accept: "image/*" %>
   <%= f.submit "Save" %>
 <% end %>
+
+  <%= link_to 'Delete My Account', withdraw_user_path(@user), method: :patch, data: {confirm: "Are you sure you want to ？"} %>
