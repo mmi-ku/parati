@@ -27,5 +27,6 @@
     <p>Genre: <%= post.genre %></p>
     <p>Title: <%= post.title %></p>
     <p>Caption: <%= post.body %></p>
+    <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
   </div>
 <% end %>

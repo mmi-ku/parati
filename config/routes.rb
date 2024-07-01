@@ -6,16 +6,17 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
-
+  get 'home/about', to: 'homes#about', as: 'about'
+  
   resources :users, only: [:show, :index, :edit, :update]
-  resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+   resources :post_comments, only: [:create]
+  end
 
   namespace :admin do
     resources :genres, only: [:create, :index, :edit, :update]
   end
-
-  get 'home/about', to: 'homes#about', as: 'about'
-
+  
   get "search" => "searches#search"
 
   patch 'withdraw/:id' => 'users#withdraw', as: 'withdraw_user'
