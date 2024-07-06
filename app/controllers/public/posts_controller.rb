@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Public:: PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_genre, only: [:index, :new, :edit, :create, :update]
   

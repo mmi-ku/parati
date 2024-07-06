@@ -23,12 +23,15 @@ Users = User.create!(
 )
 
 User.all.each do |user|
-  post = user.posts.create!(
+  post = user.posts.build(
     title: 'Sample title',
     body: 'Sample text'
   )
-  post.images.attach(io: File.open(Rails.root.join('db/images/no_image.jpeg')),
-  filename: 'no_images.jpeg')
+  post.image.attach(
+    io: File.open(Rails.root.join('db/images/no_image.jpg')),
+    filename: 'no_image.jpg'
+  )
+  post.save!
 end
 
 Genre.create!(
