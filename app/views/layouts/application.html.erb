@@ -32,13 +32,13 @@
     
                    <li>
                     <%= link_to user_path(current_user.id),class: 'nav-link text-light' do %>
-                      <i class="fas fa-users"></i> MyPage
+                      <i class="fa-solid fa-user"></i> MyPage
                     <% end %>
                   </li>
     
                   <li>
                     <%= link_to new_post_path,class: 'nav-link text-light' do %>
-                      <i class="fas fa-book-open"></i> Post
+                      <i class="fa-solid fa-square-plus"></i> Post
                     <% end %>
                   </li>
     
@@ -51,7 +51,7 @@
                   <li>
                     <div class="search_form">
                       <%= form_with url: search_path, local: true, method: :get do |f| %>
-                        <%= f.collection_select :word, Genre.all, :name, :name, { prompt: "ジャンルを選択してください" }, { class: "form-control" } %>
+                        <%= f.collection_select :word, Genre.all, :name, :name, { prompt: "Choose Genre" }, { class: "form-control" } %>
                         <%= f.hidden_field :range, value: 'Genre' %>
                         <%= f.hidden_field :search, value: "partial_match" %>
                         <%= f.submit "Search", class: "btn btn-primary" %>

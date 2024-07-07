@@ -37,7 +37,7 @@ class Public:: PostsController < ApplicationController
         flash[:notice] = 'Successfully Updated.'
         redirect_to post_path(@post.id)  
       else
-        render :edit
+        render :show
       end 
   end
   

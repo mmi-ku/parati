@@ -10,7 +10,7 @@
   <%= image_tag @user.get_profile_image(100,100) %>
 
   <% if @user == current_user %>
-       <%= link_to "Edit Profile", edit_user_path(@user) %>
+       <%= link_to "Edit Profile", edit_user_path(@user), class: "btn-sm btn-success" %>
   <% end %>
 </div>     
 
