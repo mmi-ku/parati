@@ -4,10 +4,10 @@
     <p><%= link_to post_path(post) do %>
       <%= image_tag post.get_image %>
     <% end %></p>
+    
     <p>User name：<%= post.user.name %></p>
+    
     <p><%= post.genre.name if post.genre.present? %></p>
-    <p>Title：<%= post.title %></p>
-    <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
     
     <% if post.genre %>
     <p>Genre: <%= post.genre.name %></p>
@@ -15,6 +15,9 @@
       <p>Genre: No genre assigned</p> 
     <% end %>
     
-    <p>Caption：<%= post.body %></p>
+    <p>Title：<%= post.title %></p>
+    <p>Caption：<%= post.body %></p> 
+    
+    <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
   </div>
 <% end %>
