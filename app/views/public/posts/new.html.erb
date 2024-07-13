@@ -22,5 +22,22 @@
   <h4>Caption</h4>
   <%= f.text_area :body %>
   
+   <!--STAR REVIEW-->
+   <div class="form-group row" id="star">
+    <%= f.label :star,'Rate', class:'col-md-3 col-form-label' %>
+    <%= f.hidden_field :star, id: :review_star %>
+　　　　</div>
+  <script>
+　　　　$('#star').empty();
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+ 　   scoreName:'post[star]',
+    half: false,
+  });
+  </script>
+  <!--STAR REVIEW RATE-->
+  
   <%= f.submit 'Share' %>
 <% end %>

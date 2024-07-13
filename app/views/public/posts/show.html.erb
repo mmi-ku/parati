@@ -22,6 +22,22 @@
     <% end %>
     
 　  <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
+　  <!--以下、レビュー評価-->
+　  
+　           <td>
+            <div id="star-rate<%= @post.id%>"></td>
+             <script>
+              $('#star-rate<%= @post.id %>').empty();
+              $('#star-rate<%= @post.id%>').raty({
+                 size      : 36,
+                 starOff   : '<%= asset_path('star-off.png') %>',
+                 starOn    : '<%= asset_path('star-on.png') %>',
+                 half      : false,
+                 readOnly: true,
+                 score: <%= @post.star %>,
+               });
+             </script>
+          </td>
   </div>　  
     <!--以下　コメント-->
     <div>
