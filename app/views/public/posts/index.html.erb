@@ -19,8 +19,7 @@
     <p>Caption：<%= post.body %></p>
     
     <!--以下、レビュー評価-->
-           <td>
-          <div id="star-rate<%= post.id%>"> </td>
+        <td><div id="star-rate<%= post.id%>"> </td>
           <script>
             $('#star-rate<%= post.id %>').empty();
             $('#star-rate<%= post.id%>').raty({
