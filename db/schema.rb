@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_07_13_135217) do
+ActiveRecord::Schema.define(version: 2024_07_14_125932) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2024_07_13_135217) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "star"
+    t.integer "star"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -74,8 +74,14 @@ ActiveRecord::Schema.define(version: 2024_07_13_135217) do
     t.string "title"
     t.text "body"
     t.integer "genre_id"
-    t.string "star"
     t.index ["genre_id"], name: "index_posts_on_genre_id"
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "user_images", force: :cascade do |t|

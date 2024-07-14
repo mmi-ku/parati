@@ -1,5 +1,5 @@
 <h1>All Posts</h1>
-<% @post.each do |post| %>
+<% @posts.each do |post| %>
   <div>
     <p><%= link_to post_path(post) do %>
       <%= image_tag post.get_image %>
@@ -19,19 +19,18 @@
     <p>Caption：<%= post.body %></p>
     
     <!--以下、レビュー評価-->
-        <td><div id="star-rate<%= post.id%>"> </td>
-          <script>
-            $('#star-rate<%= post.id %>').empty();
-            $('#star-rate<%= post.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              half      : false,
-              readOnly: true,
-              score: <%= post.star %>,
-            });
-          </script>
-          </div>    
+    <div id="star-rate<%= post.id%>"></div>
+    <script>
+      $('#star-rate<%= post.id %>').empty();
+      $('#star-rate<%= post.id %>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        half      : false,
+        readOnly: true,
+        score: <%= post.post_comments.average(:star).to_f %>,
+      });
+    </script>
     
     <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
   </div>

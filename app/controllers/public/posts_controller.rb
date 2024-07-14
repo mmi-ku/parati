@@ -19,12 +19,13 @@ class Public:: PostsController < ApplicationController
   end
 
   def index
-    @post = Post.all
+    @posts = Post.includes(:post_comments)
   end
 
   def show
      @post = Post.find(params[:id])
      @post_comment = PostComment.new
+     
      
   end
   
