@@ -28,8 +28,8 @@ User.all.each do |user|
     body: 'Sample text'
   )
   post.image.attach(
-    io: File.open(Rails.root.join('db/images/no_image.jpg')),
-    filename: 'no_image.jpg'
+    io: File.open(Rails.root.join('db/images/no_image_square.jpg')),
+    filename: 'no_image_square.jpg'
   )
   post.save!
 end

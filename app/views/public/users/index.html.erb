@@ -13,7 +13,7 @@
         <td><%= user.name %></td>
         <td> Following : <%= user.followings.count %></td>
         <td> Followers: <%= user.followers.count %></td>
-        <td><%= render "relationships/btn", user: user, options: { class: "follow-link" } %></td>
+        <td><%= render "public/relationships/btn", user: user, options: { class: "follow-link" } %></td>
         <td><%= link_to "Show", user %></td>
       </tr>
     <% end %>
