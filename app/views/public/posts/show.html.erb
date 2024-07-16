@@ -1,82 +1,93 @@
   <div>
     <%= flash[:notice] %>
   </div>
-
-  <div>
-    <p>User：<%= @post.user.name %></p>
-    <%= link_to user_path(@post.user.id) do %>
-      <%= image_tag @post.user.get_profile_image(100, 100) %>
-    <% end %>
-    
-    <% if @post.genre %>
-      <p>Genre: <%= @post.genre.name %></p>
-    <% else %>
-      <p>Genre: No genre assigned</p> 
-    <% end %>
-    
-    <p>Title: <%= @post.title %></p>
-    <p>Caption: <%= @post.body %></p>
-    <p><%= image_tag @post.get_image %></p>
-    <p>Post date：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    
-  <!--投稿に対するコメントレビュー評価-->
-  <h3>Reviews</h3>
-  <div>
-    <p>comments：<%= @post.post_comments.count %></p>
-    <% @post.post_comments.each do |post_comment| %>
-        <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
-        <%= post_comment.user.name %>
-        <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-      <div id="post-comments<%= @post.id %>">
-      <div class="post_comment" id="post_comment-<%= post_comment.id %>">
-        <p><%= post_comment.comment %></p>
-        <div id="star-rate-<%= post_comment.id %>"></div>
-        <script>
-          $('#star-rate-<%= post_comment.id %>').empty();
-          $('#star-rate-<%= post_comment.id %>').raty({
-            size      : 36,
-            starOff   : '<%= asset_path('star-off.png') %>',
-            starOn    : '<%= asset_path('star-on.png') %>',
-            half      : false,
-            readOnly: true,
-            score: <%= post_comment.star %>,
-          });
-        </script>
-        </div>
-      <% end %>
-      </div>
-  </div>  
-  <!--以下　コメント投稿-->
   
-   <h3>Post reviews</h3>
-    <div>
-      <%= form_with model: [@post, @post_comment] do |f| %>
-        <div class="form-group row" id="star">
-          <%= f.label :star,'Rate', class:'col-md-3 col-form-label' %>
-          <%= f.hidden_field :star, id: :review_star %>
-    　　　</div>
+   <div class="container">
+        <div class="row">
+            <div class="col-md-3">
 
-        <%= f.text_area :comment, rows: '5', placeholder: "Comment Here" %>
-        
-        <%= f.submit "Post" %>
-      <% end %>
-    </div>    
-
-
-<script>
-　$('#star').empty();
-  $('#star').raty({
-    size     : 36,
-    starOff:  '<%= asset_path('star-off.png') %>',
-    starOn : '<%= asset_path('star-on.png') %>',
- 　  scoreName:'post_comment[star]',
-    half: false,
-  });
-</script>
-
-    <% if @post.user == current_user %>
-      <%= link_to "Edit", edit_post_path(@post), class: "btn-sm btn-success" %>
-      <%= link_to "Delete", post_path(@post), method: :delete, class: "btn-sm btn-danger" %>
-    <% end %>
-    
-　  <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
+              <div>
+                <p>User：<%= @post.user.name %></p>
+                <%= link_to user_path(@post.user.id) do %>
+                  <%= image_tag @post.user.get_profile_image(100, 100) %>
+                <% end %>
+                
+                <% if @post.genre %>
+                  <p>Genre: <%= @post.genre.name %></p>
+                <% else %>
+                  <p>Genre: No genre assigned</p> 
+                <% end %>
+                
+                <p>Title: <%= @post.title %></p>
+                <p>Caption: <%= @post.body %></p>
+                <p><%= image_tag @post.get_image %></p>
+                <p>Post date：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+               
+              <!--投稿に対するコメントレビュー評価-->
+              
+              <h3>Reviews</h3>
+              <div>
+                <p>comments：<%= @post.post_comments.count %></p>
+                <% @post.post_comments.each do |post_comment| %>
+                    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+                    <%= post_comment.user.name %>
+                    <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+                  <div id="post-comments<%= @post.id %>">
+                  <div class="post_comment" id="post_comment-<%= post_comment.id %>">
+                    <p><%= post_comment.comment %></p>
+                    <div id="star-rate-<%= post_comment.id %>"></div>
+                    <script>
+                      $('#star-rate-<%= post_comment.id %>').empty();
+                      $('#star-rate-<%= post_comment.id %>').raty({
+                        size      : 36,
+                        starOff   : '<%= asset_path('star-off.png') %>',
+                        starOn    : '<%= asset_path('star-on.png') %>',
+                        half      : false,
+                        readOnly: true,
+                        score: <%= post_comment.star %>,
+                      });
+                    </script>
+                    </div>
+                  <% end %>
+                  </div>
+              </div>  
+              
+              <!--以下　コメント投稿-->
+               
+               <h3>Post reviews</h3>
+                <div>
+                  <%= form_with model: [@post, @post_comment] do |f| %>
+                    <div class="form-group row" id="star">
+                      <%= f.label :star,'Rate', class:'col-md-3 col-form-label' %>
+                      <%= f.hidden_field :star, id: :review_star %>
+                　　　</div>
+            
+                    <%= f.text_area :comment, rows: '5', placeholder: "Comment Here" %>
+                    
+                    <%= f.submit "Post" %>
+                  <% end %> 
+                  <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
+                </div>    
+            
+            
+            <script>
+            　$('#star').empty();
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+             　  scoreName:'post_comment[star]',
+                half: false,
+              });
+            </script>
+            
+                <% if @post.user == current_user %>
+                  <%= link_to "Edit", edit_post_path(@post), class: "btn-sm btn-success" %>
+                  <%= link_to "Delete", post_path(@post), method: :delete, class: "btn-sm btn-danger" %>
+                <% end %>
+                
+            　 
+            
+            </div>
+        </div>
+    </div>

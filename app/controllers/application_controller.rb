@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     controller_name == 'homes' && action_name == 'top'
   end
   
+  def after_sign_in_path_for(resource)
+    posts_path(resource) 
+  end
+  
 end

@@ -1,61 +1,57 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">My Page</h1>
 
-<h1>My Page</h1>
+      <div>
+        <%= flash[:notice] %>
+      </div>
 
-<div>
-  <%= flash[:notice] %>
-</div>
+      <div class="text-center">
+        <h3><%= @user.name %></h3>
+        <%= image_tag @user.get_profile_image(100, 100) %>
 
-<div>
-  <h3><%= @user.name %></h3>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  
-  
-        <td>Following: <%= @user.followings.count %></td>
-        <td>Followers: <%= @user.followers.count %></td>
-        <td><%= render "public/relationships/btn", user: @user, options: { class: "follow-link" } %></td>
-        
-        
-        <tr>
-          <th>follows</th>
-          <th><%= link_to @user.followings.count, user_followings_path(@user) %></th>
-        </tr>
-        <tr>
-          <th>followers</th>
-          <th><%= link_to @user.followers.count, user_followers_path(@user) %></th>
-        </tr>
-      
-      <div class="row">
+        <table class="table table-bordered">
+          <tr>
+            <th>Following</th>
+            <td><%= link_to @user.followings.count, user_followings_path(@user) %></td>
+          </tr>
+          <tr>
+            <th>Followers</th>
+            <td><%= link_to @user.followers.count, user_followers_path(@user) %></td>
+          </tr>
+        </table>
+
         <% if current_user != @user %>
-          <td><%= render "public/relationships/btn", user: @user, options: { class: ""} %></td>
+          <div><%= render "public/relationships/btn", user: @user, options: { class: ""} %></div>
         <% else %>
           <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
             <i class="fas fa-user-cog"></i>
           <% end %>
+          <%= link_to user_path(@user), method: :delete, data: { confirm: "Are you sure you want to delete your account?" }, class: "btn btn-outline-secondary btn-block" do %>
+            <i class="fa-solid fa-user-slash"></i>
+          <% end %>
         <% end %>
       </div>
 
-  <% if @user == current_user %>
-       <%= link_to "Edit Profile", edit_user_path(@user), class: "btn-sm btn-success" %>
-        <%= link_to "Delete", user_path(@user), method: :delete, class: "btn-sm btn-danger" %>
-  <% end %>
-</div>     
+      <h2 class="text-center">Posts</h2>
+      <div>
+        <%= flash[:notice] %>
+      </div>
 
+      <% @posts.each do |post| %>
+        <div>
+          <p><%= link_to post_path(post) do %>
+            <%= image_tag post.get_image %>
+          <% end %></p>
+          <p>Genre: <%= post.genre %></p>
+          <p>Title: <%= post.title %></p>
+          <p>Caption: <%= post.body %></p>
+          <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
+        </div>
+      <% end %>
 
-<h2>Posts</h2>
-  <div>
-  <%= flash[:notice] %>
+      <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
+    </div>
   </div>
-<% @posts.each do |post| %>
-  <div>
-    <p><%= link_to post_path(post) do %>
-      <%= image_tag post.get_image %>
-    <% end %></p>
-    <p>Genre: <%= post.genre %></p>
-    <p>Title: <%= post.title %></p>
-    <p>Caption: <%= post.body %></p>
-    <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>
-  </div>
-<% end %>
-
-
-  <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
+</div>

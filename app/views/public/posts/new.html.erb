@@ -7,20 +7,36 @@
     </ul>
 <% end %>
 
-<h1>New Post</h1>
-<%= form_with model: @post do |f| %>
-  <h4>Picture</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  
-  <div class="field">
-    <%= f.label :genre %>
-    <%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: "---"} %>
-  </div>  
- 
-  <h4>Title</h4>
-  <%= f.text_field :title %>
-  <h4>Caption</h4>
-  <%= f.text_area :body %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mx-auto">
+      <h1 class="text-center">New Post</h1>
+      <%= form_with model: @post do |f| %>
+        <table class="table table-borderless">
+          <tr>
+            <th>Picture</th>
+            <td><%= f.file_field :image, accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <th><%= f.label :genre %></th>
+            <td><%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: "---"} %></td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td><%= f.text_field :title %></td>
+          </tr>
+          <tr>
+            <th>Caption</th>
+            <td><%= f.text_area :body %></td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-right">
+              <%= f.submit 'Share', class: 'btn btn-primary' %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-  <%= f.submit 'Share' %>
-<% end %>
