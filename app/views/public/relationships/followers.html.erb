@@ -1,6 +1,15 @@
 <h2>Follower Users</h2>
-<% if @users.exists? %>
-  <%= render "public/users/index", users: @users %>
-<% else %>
-  <p>No users</p>
-<% end %>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <tr>
+      <% if @users.exists? %>
+        <%= render "public/users/index", users: @users %>
+      <% else %>
+        <td>No users</td>
+      <% end %>
+      </tr>
+    </div>
+  </div>
+</div>

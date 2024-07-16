@@ -1,28 +1,50 @@
-  <div>
-    <%= flash[:notice] %>
-  </div>
-  
-   <div class="container">
-        <div class="row">
-            <div class="col-md-3">
+<div>
+  <%= flash[:notice] %>
+</div>
 
-              <div>
-                <p>User：<%= @post.user.name %></p>
-                <%= link_to user_path(@post.user.id) do %>
-                  <%= image_tag @post.user.get_profile_image(100, 100) %>
-                <% end %>
-                
-                <% if @post.genre %>
-                  <p>Genre: <%= @post.genre.name %></p>
-                <% else %>
-                  <p>Genre: No genre assigned</p> 
-                <% end %>
-                
-                <p>Title: <%= @post.title %></p>
-                <p>Caption: <%= @post.body %></p>
-                <p><%= image_tag @post.get_image %></p>
-                <p>Post date：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-               
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tr>
+          <th colspan="2" class="text-center">Post Details</th>
+        </tr>
+        <tr>
+          <th>User</th>
+          <td class="text-center">
+            <%= @post.user.name %><br>
+            <%= link_to user_path(@post.user.id) do %>
+              <%= image_tag @post.user.get_profile_image(100, 100) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Genre</th>
+          <td class="text-center">
+            <% if @post.genre %>
+              <%= @post.genre.name %>
+            <% else %>
+              No genre assigned
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Title</th>
+          <td class="text-center"><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th>Caption</th>
+          <td class="text-center"><%= @post.body %></td>
+        </tr>
+        <tr>
+          <th>Image</th>
+          <td class="text-center"><%= image_tag @post.get_image %></td>
+        </tr>
+        <tr>
+          <th>Post Date</th>
+          <td class="text-center"><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      </table>
               <!--投稿に対するコメントレビュー評価-->
               
               <h3>Reviews</h3>
@@ -66,6 +88,7 @@
                     
                     <%= f.submit "Post" %>
                   <% end %> 
+                  
                   <%= link_to "Back", posts_path(@post), class: "btn-sm btn-primary" %>
                 </div>    
             
@@ -91,3 +114,130 @@
             </div>
         </div>
     </div>
+    
+    
+    <div>
+  <%= flash[:notice] %>
+</div>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <table class="table table-bordered">
+        <tr>
+          <th colspan="2" class="text-center">Post Details</th>
+        </tr>
+        <tr>
+          <th>User</th>
+          <td class="text-center">
+            <%= @post.user.name %><br>
+            <%= link_to user_path(@post.user.id) do %>
+              <%= image_tag @post.user.get_profile_image(100, 100) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Genre</th>
+          <td class="text-center">
+            <% if @post.genre %>
+              <%= @post.genre.name %>
+            <% else %>
+              No genre assigned
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>Title</th>
+          <td class="text-center"><%= @post.title %></td>
+        </tr>
+        <tr>
+          <th>Caption</th>
+          <td class="text-center"><%= @post.body %></td>
+        </tr>
+        <tr>
+          <th>Image</th>
+          <td class="text-center"><%= image_tag @post.get_image %></td>
+        </tr>
+        <tr>
+          <th>Post Date</th>
+          <td class="text-center"><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- Reviews -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h3 class="text-center">Reviews</h3>
+      <div>
+        <p class="text-center">Comments: <%= @post.post_comments.count %></p>
+        <% @post.post_comments.each do |post_comment| %>
+          <div class="post-comment">
+            <div class="row">
+              <div class="col-md-3">
+                <%= image_tag post_comment.user.get_profile_image(100, 100) %>
+              </div>
+              <div class="col-md-9">
+                <p><%= post_comment.user.name %></p>
+                <p><%= post_comment.created_at.strftime('%Y/%m/%d') %></p>
+                <p><%= post_comment.comment %></p>
+                <div id="star-rate-<%= post_comment.id %>"></div>
+                <script>
+                  $('#star-rate-<%= post_comment.id %>').raty({
+                    size      : 36,
+                    starOff   : '<%= asset_path('star-off.png') %>',
+                    starOn    : '<%= asset_path('star-on.png') %>',
+                    half      : false,
+                    readOnly: true,
+                    score: <%= post_comment.star %>,
+                  });
+                </script>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Post reviews -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h3 class="text-center">Post reviews</h3>
+      <div>
+        <%= form_with model: [@post, @post_comment] do |f| %>
+          <div class="form-group row" id="star">
+            <%= f.label :star, 'Rate', class: 'col-md-3 col-form-label text-center' %>
+            <%= f.hidden_field :star, id: :review_star, data: { score: 0 } %>
+          </div>
+          <div class="form-group text-center">
+            <%= f.text_area :comment, rows: '5', placeholder: "Comment Here" %>
+          </div>
+          <div class="text-center">
+            <%= f.submit "Post", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+
+        <script>
+          $(document).on('turbolinks:load', function() {
+            $('#review_star').raty({
+              size     : 36,
+              starOff  : '<%= asset_path('star-off.png') %>',
+              starOn   : '<%= asset_path('star-on.png') %>',
+              scoreName: 'post_comment[star]',
+              half     : false,
+            });
+          });
+        </script>
+
+        <% if @post.user == current_user %>
+          <%= link_to "Edit", edit_post_path(@post), class: "btn btn-success" %>
+          <%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure?" } %>
+        <% end %>
+
+        <%= link_to "Back", posts_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
