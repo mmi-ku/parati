@@ -11,95 +11,94 @@
     <script src="https://kit.fontawesome.com/70b5054063.js" crossorigin="anonymous"></script>
   </head>
 
-
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="/">ParaTi</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-              <% if user_signed_in? %>
-                  <li>
-                    <%= link_to posts_path,class: 'nav-link text-light' do %>
-                      <i class="fas fa-home"></i> Home
-                    <% end %>
-                  </li>
-    
-                   <li>
-                    <%= link_to user_path(current_user.id),class: 'nav-link text-light' do %>
-                      <i class="fa-solid fa-user"></i> MyPage
-                    <% end %>
-                  </li>
-    
-                  <li>
-                    <%= link_to new_post_path,class: 'nav-link text-light' do %>
-                      <i class="fa-solid fa-square-plus"></i> Post
-                    <% end %>
-                  </li>
-    
-                  <li>
-                    <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
-                      <i class="fas fa-sign-out-alt"></i> Log out
-                    <% end %>
-                  </li>
-                  
-                  <li>
-                    <div class="search_form">
-                      <%= form_with url: search_path, local: true, method: :get do |f| %>
-                        <%= f.collection_select :word, Genre.all, :name, :name, { prompt: "Choose Genre" }, { class: "form-control" } %>
-                        <%= f.hidden_field :range, value: 'Genre' %>
-                        <%= f.hidden_field :search, value: "partial_match" %>
-                        <%= f.submit "Search", class: "btn btn-primary" %>
-                      <% end %>
-                    </div>
-                  </li>
-                
-                  <li>
-                     <div class="search_form">
-                      <%= form_with url: search_path, local: true, method: :get do |f| %>
-                        <%= f.text_field :word %>
-                        <%= f.select :range, options_for_select([['User'], ['Post']]) %>
-                        <%= f.hidden_field :search, value: "partial_match" %>
-                        <%= f.submit "Search", class: "btn btn-primary" %>
-                      <% end %>
-                    </div>
-                  </li>
-              
-    
-               <% else %>
-    
-                 <li>
-                    <%= link_to "/", class: 'nav-link text-light' do %>
-                    <i class="fa-solid fa-home"></i> Home
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to about_path, class: 'nav-link text-light' do %>
-                    <i class="fa-solid fa-link"></i> About
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
-                    <i class="fa-solid fa-user-plus"></i> Sign up
-                    <% end %>
-                  </li>
-                  <li>
-                    <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
-                    <i class="fas fa-sign-in-alt"></i> Log in
-                    <% end %>
-                  </li>
-              <% end %>
-              </ul>
-            </div>
-          </div>
-        </nav>  
-    </header>
+          <a class="navbar-brand font-weight-bold" href="/">ParaTi</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
 
+          <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+              <% if user_signed_in? %>
+                <li class="nav-item">
+                  <%= link_to posts_path, class: 'nav-link text-light' do %>
+                    <i class="fas fa-home"></i> Home
+                  <% end %>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to user_path(current_user.id), class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-user"></i> MyPage
+                  <% end %>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to new_post_path, class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-square-plus"></i> Post
+                  <% end %>
+                </li>
+
+                <li class="nav-item">
+                  <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                  <% end %>
+                </li>
+                
+                <li class="nav-item">
+                  <div class="search_form">
+                    <%= form_with url: search_path, local: true, method: :get, class: "form-inline" do |f| %>
+                      <%= f.collection_select :word, Genre.all, :name, :name, { prompt: "Choose Genre" }, { class: "form-control mr-2" } %>
+                      <%= f.hidden_field :range, value: 'Genre' %>
+                      <%= f.hidden_field :search, value: "partial_match" %>
+                      <%= f.submit "Search", class: "btn btn-primary" %>
+                    <% end %>
+                  </div>
+                </li>
+              
+                <li class="nav-item">
+                  <div class="search_form">
+                    <%= form_with url: search_path, local: true, method: :get, class: "form-inline" do |f| %>
+                      <%= f.text_field :word, class: "form-control mr-2" %>
+                      <%= f.select :range, options_for_select([['User'], ['Post']]), {}, { class: "form-control mr-2" } %>
+                      <%= f.hidden_field :search, value: "partial_match" %>
+                      <%= f.submit "Search", class: "btn btn-primary" %>
+                    <% end %>
+                  </div>
+                </li>
+
+              <% else %>
+
+                <li class="nav-item">
+                  <%= link_to "/", class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-home"></i> Home
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to about_path, class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-link"></i> About
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_registration_path, class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-user-plus"></i> Sign up
+                  <% end %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to new_user_session_path, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-in-alt"></i> Log in
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>  
+    </header>
+  </body>
+</html>
   <%= yield %>
   
   <footer>
