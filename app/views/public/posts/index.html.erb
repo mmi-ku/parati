@@ -10,7 +10,7 @@
         <% @posts.each do |post| %>
           <tr>
             <th class="col-3">User name</th>
-            <td class="col-9"><%= post.user.name %></td>
+            <td class="col-9"><%= link_to post.user.name, user_path(post.user) %></td>
           </tr>
           <tr>
             <th class="col-3">Image</th>

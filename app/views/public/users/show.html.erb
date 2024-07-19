@@ -1,7 +1,9 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h1 class="text-center">My Page</h1>
+      <% if current_user == @user %>
+      <h2 class="text-center">My Page</h2>
+      <% end %>
       <div class="text-center">
         <div class="d-flex align-items-center justify-content-center mb-3">
           <h3 class="mb-0 mr-3"><%= @user.name %></h3>
