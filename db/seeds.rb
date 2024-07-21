@@ -18,7 +18,9 @@ Users = User.create!(
   [
     {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
     {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
-    {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'}
+    {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'},
+    {email: 'sarah@example.com', name: 'Sarah', password: 'password', password_confirmation: 'password'},
+    {email: 'jone@example.com', name: 'Jone', password: 'password', password_confirmation: 'password'}
   ]
 )
 
