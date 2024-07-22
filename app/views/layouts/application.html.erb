@@ -15,7 +15,16 @@
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-primary">
         <div class="container">
-          <a class="navbar-brand font-weight-bold" href="/">ParaTi</a>
+          <% if user_signed_in? %>
+            <% link_path = posts_path %> <!-- ユーザーがログインしている場合はポスト一覧ページ -->
+          <% elsif admin_signed_in? %>
+            <% link_path = admin_genres_path %> <!-- 管理者がログインしている場合はジャンル一覧ページ -->
+          <% else %>
+            <% link_path = new_user_session_path %> <!-- ログインしていない場合はログインページ -->
+          <% end %>
+          
+          <!-- ParaTi リンクに動的な href 属性を設定 -->
+          <a class="navbar-brand font-weight-bold" href="<%= link_path %>">ParaTi</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -68,6 +77,19 @@
                     <% end %>
                   </div>
                 </li>
+                
+              <% elsif admin_signed_in? %>
+               <li>
+                <%= link_to admin_dashboards_path, class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-users"></i> Users
+                <% end %>
+               </li>     
+               
+               <li>
+                <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                <% end %>
+               </li>
 
               <% else %>
 

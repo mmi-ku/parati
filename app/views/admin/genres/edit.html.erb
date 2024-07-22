@@ -1,7 +1,17 @@
-<h3>ジャンル編集</h3>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <h3 class="text-center">Genre Edit</h3>
 
-      <%= form_with model: @genre, url: admin_genre_path,method: :patch do |f| %>
-        <td><%= f.label :"ジャンル名", class: "mr-3" %></td>
-        <td><%= f.text_field :name, class: "mr-5" %></td>
-        <td><%= f.submit "変更を保存", class: "btn btn-primary" %></td>
+      <%= form_with model: @genre, url: admin_genre_path, method: :patch, local: true do |f| %>
+        <div class="form-group">
+          <%= f.label :name, "Genre Name", class: "form-label" %>
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+        <div class="form-group text-center">
+          <%= f.submit "Save changes", class: "btn btn-primary" %>
+        </div>
       <% end %>
+    </div>
+  </div>
+</div>

@@ -14,7 +14,7 @@
 #   user.name = "James"
 #   user.password = "password"
 # end
-Users = User.create!(
+Users = User.create (
   [
     {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
     {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
@@ -36,7 +36,7 @@ User.all.each do |user|
   post.save!
 end
 
-Genre.create!(
+Genre.create (
   [
     {name: 'Jeans'},
     {name: 'Blouse'},
@@ -49,3 +49,8 @@ Genre.create!(
     {name: 'Babysuits'},
   ]
   )
+  
+  Admin.create!(
+   email: 'admin@admin',
+   password: 'testtest'
+)
