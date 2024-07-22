@@ -18,7 +18,8 @@
       <% end %>
 
       <div class="text-center mt-3">
-        <%= link_to "Back", user_path(@user), class: "btn btn-sm btn-primary mr-2" %>
+        <%= link_to "Back", user_path(@user), class: "btn btn-primary btn-block" %>
+        <div class="my-3"></div> <!-- ここで隙間を作成 -->
         <%= link_to 'Delete My Account', withdraw_user_path(@user), method: :patch, class: "btn btn-sm btn-danger", data: { confirm: "Are you sure you want to delete your account?" } %>
       </div>
     </div>
