@@ -13,3 +13,9 @@
  *= require_tree .
  *= require_self
  */
+body {
+  background-image: url(asset-path('green_background.jpg'));
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
