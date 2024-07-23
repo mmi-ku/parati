@@ -13,17 +13,16 @@
 
   <body>
     <header>
-      <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <nav class="navbar navbar-expand-lg navbar-light nav-custom">
         <div class="container">
           <% if user_signed_in? %>
-            <% link_path = posts_path %> <!-- ユーザーがログインしている場合はポスト一覧ページ -->
+            <% link_path = posts_path %> 
           <% elsif admin_signed_in? %>
-            <% link_path = admin_genres_path %> <!-- 管理者がログインしている場合はジャンル一覧ページ -->
+            <% link_path = admin_genres_path %> 
           <% else %>
-            <% link_path = new_user_session_path %> <!-- ログインしていない場合はログインページ -->
+            <% link_path = new_user_session_path %> 
           <% end %>
           
-          <!-- ParaTi リンクに動的な href 属性を設定 -->
           <a class="navbar-brand font-weight-bold" href="<%= link_path %>">ParaTi</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -56,13 +55,13 @@
                   <% end %>
                 </li>
                 
-                <li class="nav-item">
+                <li class="nav-item mb-3">
                   <div class="search_form">
                     <%= form_with url: search_path, local: true, method: :get, class: "form-inline" do |f| %>
                       <%= f.collection_select :word, Genre.all, :name, :name, { prompt: "Choose Genre" }, { class: "form-control mr-2" } %>
                       <%= f.hidden_field :range, value: 'Genre' %>
                       <%= f.hidden_field :search, value: "partial_match" %>
-                      <%= f.submit "Search", class: "btn btn-primary" %>
+                      <%= f.submit "Search", class: "btn btn-white" %>
                     <% end %>
                   </div>
                 </li>
@@ -73,7 +72,7 @@
                       <%= f.text_field :word, class: "form-control mr-2" %>
                       <%= f.select :range, options_for_select([['User'], ['Post']]), {}, { class: "form-control mr-2" } %>
                       <%= f.hidden_field :search, value: "partial_match" %>
-                      <%= f.submit "Search", class: "btn btn-primary" %>
+                      <%= f.submit "Search", class: "btn btn-white" %>
                     <% end %>
                   </div>
                 </li>
@@ -121,10 +120,24 @@
     </header>
   </body> 
     <!--<main> -->
-    <div>
-    <%= notice %>
-    </div>
-    <%= yield %>
+  <!--<div class="container mt-4">-->
+  <!--    <div class="row">-->
+  <!--      <div class="col-md-8 mx-auto">-->
+  <!--        <% if flash[:notice] %>-->
+  <!--          <div class="alert alert-success">-->
+  <!--            <%= flash[:notice] %>-->
+  <!--          </div>-->
+  <!--        <% end %>-->
+  <!--        <% if flash[:alert] %>-->
+  <!--          <div class="alert alert-danger">-->
+  <!--            <%= flash[:alert] %>-->
+  <!--          </div>-->
+  <!--        <% end %>-->
+
+          <%= yield %>
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
     <!--</main>-->
   <footer>
     <div class="container mt-5">
@@ -135,8 +148,5 @@
       </div>
     </div>
   </footer>
-
-  </body>
-
 
 </html>

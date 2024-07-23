@@ -1,1 +1,23 @@
 @use '~bootstrap/scss/bootstrap';
+
+body {
+  background-image: url('./images/green_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.postimage-size {
+  height: 200px;
+  width: 200px;
+}
+
+.nav-custom {
+  background-color: #69b076; 
+}
+
+.btn-white {
+  background-color: white;
+  color: black;
+  border: 1px solid white;
+}
