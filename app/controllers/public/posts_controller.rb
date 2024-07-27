@@ -30,7 +30,10 @@ class Public:: PostsController < ApplicationController
   
   def edit
     @post = Post.find(params[:id])
-    @post_comment = PostComment.find(params[:comment_id])
+    @genres = Genre.all
+  rescue ActiveRecord::RecordNotFound => e
+    flash[:alert] = "Record not found: #{e.message}"
+    redirect_to posts_path
   end
   
   def update
