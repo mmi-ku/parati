@@ -21,3 +21,25 @@ body {
   color: black;
   border: 1px solid white;
 }
+
+.pagination {
+  > li {
+    > a {
+      border: none;
+      color: #696969;
+    }
+  }
+
+  > .active {
+    > a {
+      background: #93c9ff; 
+      border-radius: 15px; 
+    }
+  }
+
+  > li {
+    > a:hover {
+      border-radius: 15px; 
+    }
+  }
+}

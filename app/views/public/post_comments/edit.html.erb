@@ -1,0 +1,44 @@
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <% if @post.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= @post.errors.count %> errors prohibited this object from being saved:</h4>
+          <ul>
+            <% @post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <h1 class="text-center">Edit Post</h1>
+      <%= form_with model: [@post, @post_comment], local: true, class: "mt-4" do |f| %>
+        <div class="form-group row justify-content-center" id="star">
+          <%= f.label :star, 'Rate', class: 'col-md-3 col-form-label text-center', for: 'review_star' %>
+          <%= f.hidden_field :star, id: 'review_star' %>
+        </div>
+        <div class="form-group row justify-content-center">
+          <%= f.text_area :comment, rows: '5', placeholder: "Comment Here", class: "form-control" %>
+        </div>
+        <div class="text-center mt-4">
+          <%= f.submit 'Save', class: "btn btn-primary btn-block" %>
+        </div>
+        <div class="text-center mt-2">
+          <%= link_to "Back", post_path, class: "btn btn-secondary btn-block" %>
+        </div>
+      <% end %>
+      
+      <script>
+        $('#star').empty();
+        $('#star').raty({
+          size: 36,
+          starOff: '<%= asset_path('star-off.png') %>',
+          starOn: '<%= asset_path('star-on.png') %>',
+          scoreName: 'post_comment[star]',
+          half: false,
+        });
+      </script>
+    </div>
+  </div>
+</div>

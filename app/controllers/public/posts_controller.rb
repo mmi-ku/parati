@@ -19,18 +19,18 @@ class Public:: PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:post_comments)
+    @posts = Post.includes(:post_comments).page(params[:page]).per(5)
   end
 
   def show
      @post = Post.find(params[:id])
      @post_comment = PostComment.new
-     
-     
+     @Post_comments =@post.post_comments
   end
   
   def edit
     @post = Post.find(params[:id])
+    @post_comment = PostComment.find(params[:comment_id])
   end
   
   def update
