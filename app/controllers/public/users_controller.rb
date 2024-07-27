@@ -1,4 +1,7 @@
 class Public:: UsersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update]
+  
   def index
     @users = User.all
 
@@ -28,10 +31,21 @@ class Public:: UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(is_valid: false)
     reset_session
-    redirect_to root_path
+    redirect_to root_path, notice: "Your account has been deleted successfully."
   end
   
   private
+  
+  def correct_user
+    @user = User.find(params[:id])
+    unless current_user == @user
+    redirect_to user_path(@user), alert: "You are not authorized to edit this user's profile."
+    end
+  end
+  
+  def current_user?(user)
+    user == current_user
+  end
 
   def user_params
     params.require(:user).permit(:name, :user_image)

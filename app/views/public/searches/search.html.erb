@@ -3,38 +3,57 @@
     <div class="col-md-8">
       <h2 class="text-center">Search Results</h2>
 
-      <table class="table table-hover table-inverse">
-        <% if @range == "User" %>
-          <tbody>
-            <% @users.each do |user| %>
-              <tr>
-                <td><%= link_to user.name, user_path(user) %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        <% elsif @range == "Post" %>
-          <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td><strong>Title:</strong> <%= link_to post.title, post_path(post) %></td>
-                <td><strong>Caption:</strong> <%= post.body %></td>
-              </tr>
-            <% end %>
-          </tbody>
-        <% elsif @range == "Genre" %>
-          <tbody>
-            <% @posts.each do |post| %>
-              <tr>
-                <td><%= link_to post.title, post_path(post) %></td>
-                <td><%= link_to post_path(post) do %>
-                      <%= image_tag post.get_image %>
-                    <% end %>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
+      <% if @range == "User" %>
+        <% if @users.empty? %>  
+          <p class="text-center">No results</p>
+        <% else %>
+          <table class="table table-hover table-inverse">
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= link_to user.name, user_path(user) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         <% end %>
-      </table>
+
+      <% elsif @range == "Post" %>
+        <% if @posts.empty? %> 
+          <p class="text-center">No results</p>
+        <% else %>
+          <table class="table table-hover table-inverse">
+            <tbody>
+              <% @posts.each do |post| %>
+                <tr>
+                  <td><strong>Title:</strong> <%= link_to post.title, post_path(post) %></td>
+                  <td><strong>Caption:</strong> <%= post.body %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+
+      <% elsif @range == "Genre" %>
+        <% if @posts.empty? %> 
+          <p class="text-center">No results</p>
+        <% else %>
+          <table class="table table-hover table-inverse">
+            <tbody>
+              <% @posts.each do |post| %>
+                <tr>
+                  <td><%= link_to post.title, post_path(post) %></td>
+                  <td><%= link_to post_path(post) do %>
+                        <%= image_tag post.get_image %>
+                      <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        <% end %>
+        
+      <% end %>
     </div>
   </div>
 </div>

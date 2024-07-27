@@ -1,6 +1,17 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6">
+       <% if @user.errors.any? %>
+        <div class="alert alert-danger">
+          <h4><%= @user.errors.count %> errors prohibited this object from being saved:</h4>
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
       <h2 class="text-center">Profile Edit</h2>
       <%= form_with model: @user do |f| %>
         <table class="table table-bordered">

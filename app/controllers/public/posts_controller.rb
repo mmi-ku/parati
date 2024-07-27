@@ -1,6 +1,8 @@
 class Public:: PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :set_genre, only: [:index, :new, :edit, :create, :update]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authorize_user!, only: [:edit, :update, :destroy]
   
   def new
     @post = Post.new
@@ -42,7 +44,7 @@ class Public:: PostsController < ApplicationController
         flash[:notice] = 'Successfully Updated.'
         redirect_to post_path(@post.id)  
       else
-        render :show
+        render :edit
       end 
   end
   
@@ -50,6 +52,7 @@ class Public:: PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     post.destroy
+    flash[:notice] = 'Deteled Post.'
     redirect_to posts_path
   end
   
@@ -65,6 +68,10 @@ class Public:: PostsController < ApplicationController
 
     def post_params
       params.require(:post).permit(:image, :genre_id, :title, :body)
+    end
+    
+    def authorize_user!
+      redirect_to posts_path, alert: 'Not authorized' unless @post.user_id == current_user.id
     end
   
 end

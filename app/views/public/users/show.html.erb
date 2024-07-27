@@ -41,7 +41,13 @@
             <p><%= link_to post_path(post) do %>
               <%= image_tag post.get_image, class: "img-fluid" %>
             <% end %></p>
-            <p><strong>Genre:</strong> <%= post.genre %></p>
+            <p><strong>Genre:</strong>
+              <% if post.genre %>
+                <%= post.genre.name %>
+              <% else %>
+                No genre assigned
+              <% end %>
+            </p>
             <p><strong>Title:</strong> <%= post.title %></p>
             <p><strong>Caption:</strong> <%= post.body %></p>
             <p><%= link_to "#{post.post_comments.count} Comment", post_path(post.id) %></p>

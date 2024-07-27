@@ -7,7 +7,7 @@ class Post < ApplicationRecord
 
 
   validates :image, presence: true
-  validates :genre, presence: true
+  validates :genre_id, presence: true
   validates :title, presence: true
   validates :body, presence: true
   

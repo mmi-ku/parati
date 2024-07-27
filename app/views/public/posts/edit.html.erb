@@ -22,7 +22,7 @@
         
         <div class="form-group">
           <h4>Genre</h4>
-          <%= f.label :genre_id, class: "form-label" %>
+          <%#= f.label :genre_id, class: "form-label" %>
           <%= f.collection_select :genre_id, @genres, :id, :name, {include_blank: "---"}, {class: "form-control"} %>
         </div>
         
@@ -42,7 +42,6 @@
       <% end %>
 
       <div class="text-center mt-3">
-        <%= link_to "Show", post_path(@post), class: "btn btn-primary btn-block" %>
         <%= link_to "Back", posts_path, class: "btn btn-secondary btn-block" %>
       </div>
     </div>

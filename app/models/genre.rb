@@ -1,7 +1,7 @@
 class Genre < ApplicationRecord
 
    has_many :posts
-   validates :name, presence: true
+   validates :name, presence: true, uniqueness: true
 
    def self.looks(search, word)
     if search == "perfect_match"

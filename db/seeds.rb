@@ -14,15 +14,30 @@
 #   user.name = "James"
 #   user.password = "password"
 # end
-Users = User.create (
-  [
-    {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
-    {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
-    {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'},
-    {email: 'sarah@example.com', name: 'Sarah', password: 'password', password_confirmation: 'password'},
-    {email: 'jone@example.com', name: 'Jone', password: 'password', password_confirmation: 'password'}
-  ]
-)
+# Users = User.create (
+#   [
+#     {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
+#     {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
+#     {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'},
+#     {email: 'sarah@example.com', name: 'Sarah', password: 'password', password_confirmation: 'password'},
+#     {email: 'jone@example.com', name: 'Jone', password: 'password', password_confirmation: 'password'}
+#   ]
+# )
+user_data = [
+  {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
+  {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
+  {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'},
+  {email: 'sarah@example.com', name: 'Sarah', password: 'password', password_confirmation: 'password'},
+  {email: 'jone@example.com', name: 'Jone', password: 'password', password_confirmation: 'password'}
+]
+
+user_data.each do |data|
+  User.find_or_create_by!(email: data[:email]) do |user|
+    user.name = data[:name]
+    user.password = data[:password]
+    user.password_confirmation = data[:password_confirmation]
+  end
+end
 
 User.all.each do |user|
   post = user.posts.build(
@@ -36,21 +51,30 @@ User.all.each do |user|
   post.save!
 end
 
-Genre.create (
-  [
-    {name: 'Jeans'},
-    {name: 'Blouse'},
-    {name: 'T-shirt'},
-    {name: 'Skirt'},
-    {name: 'Sweater'},
-    {name: 'Kimono'},
-    {name: 'Cardigan'},
-    {name: 'Knitwear'},
-    {name: 'Babysuits'},
-  ]
-  )
+# Genre.create (
+#   [
+#     {name: 'Jeans'},
+#     {name: 'Blouse'},
+#     {name: 'T-shirt'},
+#     {name: 'Skirt'},
+#     {name: 'Sweater'},
+#     {name: 'Kimono'},
+#     {name: 'Cardigan'},
+#     {name: 'Knitwear'},
+#     {name: 'Babysuits'},
+#   ]
+#   )
+  genre_names = ['Jeans', 'Blouse', 'T-shirt', 'Skirt', 'Sweater', 'Kimono', 'Cardigan', 'Knitwear', 'Babysuits']
+  genre_names.each do |genre_name|
+  	Genre.find_or_create_by!(name: genre_name)
+  end
   
-  Admin.create!(
-   email: 'admin@admin',
-   password: 'testtest'
-)
+  Admin.find_or_create_by!(email: "admin@admin") do |admin|
+    admin.email = "admin@admin"
+    admin.password = "testtest"
+  end
+  
+#   Admin.create!(
+#   email: 'admin@admin',
+#   password: 'testtest'
+# )
