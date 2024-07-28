@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :followings, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   
-  # validates :name, presence: true
+  validates :name, presence: true
   
   def follow(user)
     active_relationships.create(followed_id: user.id)

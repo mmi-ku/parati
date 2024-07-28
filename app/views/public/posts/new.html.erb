@@ -8,13 +8,18 @@
                   <li><%= message %></li>
                 <% end %>
               </ul>
-          <% end %>     
+          <% end %>
       <h1 class="text-center">New Post</h1>
         <%= form_with model: @post do |f| %>
         <table class="table table-borderless">
           <tr>
             <th>Picture</th>
-            <td><%= f.file_field :image, accept: "image/*" %></td>
+            <td>
+              <div class="custom-file">
+                <%= f.file_field :image, accept: "image/*", class: "custom-file-input", id: "inputGroupFile01" %>
+                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+              </div>
+            </td>
           </tr>
           <tr>
             <th><%= f.label :genre %></th>
@@ -39,3 +44,9 @@
   </div>
 </div>
 
+<script type="application/javascript">
+  $("#inputGroupFile01").change(function(e){
+      var fileName = e.target.files[0].name;
+      $('.custom-file-label').html(fileName);
+  });
+</script>

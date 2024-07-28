@@ -28,8 +28,8 @@ Rails.application.routes.draw do
     # end
 
     devise_for :users, controllers: {
-      registrations: 'users/registrations',
-      sessions: 'users/sessions'
+      registrations: 'public/registrations',
+      sessions: 'public/sessions'
     }
     get 'home/about', to: 'homes#about', as: 'about'
 
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       resource :relationships, only: [:create, :destroy]
       	get "followings" => "relationships#followings", as: "followings"
       	get "followers" => "relationships#followers", as: "followers"
-      
+
     end
 
     resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do

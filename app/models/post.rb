@@ -6,11 +6,11 @@ class Post < ApplicationRecord
   has_many :post_comments, dependent: :destroy
 
 
-  validates :image, presence: true
+  validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
   validates :genre_id, presence: true
   validates :title, presence: true
   validates :body, presence: true
-  
+
 
   def get_image
     if image.attached?
