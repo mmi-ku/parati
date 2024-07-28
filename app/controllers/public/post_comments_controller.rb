@@ -29,7 +29,7 @@ class Public:: PostCommentsController < ApplicationController
 
   def destroy
     @post_comment.destroy
-    redirect_to post_path(@post_comment.post), notice: 'Comment was successfully deleted.'
+    redirect_to post_path(@post_comment.post), notice: 'Comment was deleted.'
   end
 
   private
