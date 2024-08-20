@@ -2,12 +2,11 @@ class Post < ApplicationRecord
   has_one_attached :image
 
   belongs_to :user
-  belongs_to :genre, optional: true
+  belongs_to :genre
   has_many :post_comments, dependent: :destroy
 
 
   validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
-  validates :genre_id, presence: true
   validates :title, presence: true
   validates :body, presence: true
 

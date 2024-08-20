@@ -39,10 +39,17 @@ user_data.each do |data|
   end
 end
 
+genre_names = ['Jeans', 'Blouse', 'T-shirt', 'Skirt', 'Sweater', 'Kimono', 'Cardigan', 'Knitwear', 'Babysuits']
+genre_names.each do |genre_name|
+  Genre.find_or_create_by!(name: genre_name)
+end
+
+genre_id=Genre.find_by(name:'Jeans').id  
 User.all.each do |user|
   post = user.posts.build(
     title: 'Sample title',
-    body: 'Sample text'
+    body: 'Sample text',
+    genre_id: genre_id
   )
   post.image.attach(
     io: File.open(Rails.root.join('db/images/no_image_square.jpg')),
@@ -64,10 +71,7 @@ end
 #     {name: 'Babysuits'},
 #   ]
 #   )
-  genre_names = ['Jeans', 'Blouse', 'T-shirt', 'Skirt', 'Sweater', 'Kimono', 'Cardigan', 'Knitwear', 'Babysuits']
-  genre_names.each do |genre_name|
-  	Genre.find_or_create_by!(name: genre_name)
-  end
+
   
   Admin.find_or_create_by!(email: "admin@admin") do |admin|
     admin.email = "admin@admin"
