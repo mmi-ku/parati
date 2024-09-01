@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center">All Posts</h1>
+      <table class="table table-bordered table-borderless">
+        <% @posts.each do |post| %>
+          <tr>
+            <th class="col-3">User name</th>
+            <td class="col-9"><%= link_to post.user.name, user_path(post.user) %></td>
+          </tr>
+          <tr>
+            <th class="col-3">Image</th>
+            <td class="col-12"><%= link_to  admin_post_post_comments_path(post) do %>
+              <%= image_tag post.get_image %>
+            <% end %></td>
+          </tr>
+          <tr>
+            <th class="col-3">Genre</th>
+            <td class="col-9"><%= post.genre.name if post.genre.present? %></td>
+          </tr>
+          <tr>
+            <th class="col-3">Title</th>
+            <td class="col-9"><%= post.title %></td>
+          </tr>
+          <tr>
+            <th class="col-3">Caption</th>
+            <td class="col-9"><%= post.body %></td>
+          </tr>
+          <tr>
+            <th class="col-3">削除ボタン</th>
+            <td class="col-9">
+              <%= link_to "Delete this post as an Administrator", admin_post_path(post), method: :delete, class: "btn btn-danger btn-block" %>
+            </td>
+          </tr>
+          <!-- レビュー評価 -->
+          <tr>
+            <td colspan="2" class="text-center">
+              <div id="star-rate<%= post.id %>"></div>
+              <script>
+                $('#star-rate<%= post.id %>').empty();
+                $('#star-rate<%= post.id %>').raty({
+                  size      : 36,
+                  starOff   : '<%= asset_path('star-off.png') %>',
+                  starOn    : '<%= asset_path('star-on.png') %>',
+                  half      : false,
+                  readOnly  : true,
+                  score     : <%= post.post_comments.average(:star).to_f %>,
+                });
+              </script>
+            </td>
+          </tr>
+          <!-- 投稿ごとのスペース -->
+          <tr><td colspan="2">&nbsp;</td></tr>
+        <% end %>
+      </table>
+
+      <div class="row justify-content-center">
+        <%= paginate @posts %>
+      </div>
+
+    </div>
+  </div>
+</div>

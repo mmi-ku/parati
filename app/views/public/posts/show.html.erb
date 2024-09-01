@@ -21,13 +21,14 @@
         <li class="list-group-item text-center"><%= image_tag @post.get_image, class: 'postimage-size'%></li>
         <li class="list-group-item text-center"><strong>Post Date:</strong> <%= @post.created_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d') %></li>
       </ul>
-
+      <div class="form-group row justify-content-center mt-3">
         <% if @post.user == current_user %>
-          <div class="form-group row justify-content-center mt-3">
-            <%= link_to "Edit", edit_post_path(@post), class: "btn btn-success btn-block" %>
-            <%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger btn-block" %>
-          </div>
+          <%= link_to "Edit", edit_post_path(@post), class: "btn btn-success btn-block" %>
+          <%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger btn-block" %>
         <% end %>
+      </div>
+        
+        
 
 
       <!--投稿に対するコメントレビュー評価-->

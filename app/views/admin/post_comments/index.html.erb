@@ -1,0 +1,36 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h3 class="text-center mt-4">Reviews</h3>
+            <div>
+              <p class="text-center">comments: <%= @post.post_comments.count %></p>
+              <% @post.post_comments.each do |post_comment| %>
+                <ul class="list-group mb-3">
+                  <li class="list-group-item text-center"><%= image_tag post_comment.user.get_profile_image(100,100) %></li>
+                  <li class="list-group-item text-center"><%= post_comment.user.name %></li>
+                  <li class="list-group-item text-center"><%= post_comment.created_at.strftime('%Y/%m/%d') %></li>
+                  <li class="list-group-item text-center"><%= post_comment.comment %></li>
+                  <li class="list-group-item text-center">
+                    <div id="star-rate-<%= post_comment.id %>"></div>
+                    <script>
+                      $('#star-rate-<%= post_comment.id %>').empty();
+                      $('#star-rate-<%= post_comment.id %>').raty({
+                        size: 36,
+                        starOff: '<%= asset_path('star-off.png') %>',
+                        starOn: '<%= asset_path('star-on.png') %>',
+                        half: false,
+                        readOnly: true,
+                        score: <%= post_comment.star %>,
+                      });
+                    </script>
+                  </li>
+                </ul>
+                      <div class="form-group row justify-content-center">
+                        <%= link_to "Delete", admin_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger btn-block" %>
+                      </div>
+                   
+              <% end %>
+            </div>
+       </div>
+  </div>
+</div>
