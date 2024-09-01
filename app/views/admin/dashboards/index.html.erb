@@ -1,4 +1,18 @@
 <div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <%= form_with url: admin_dashboards_path, method: :get do |f| %>
+        <div class="row">
+          <div class="col-sm-9 mb-2">
+            <%= f.search_field :keyword, placeholder: "キーワードで検索", value: params[:keyword], class: "form-control" %>
+          </div>
+          <div class="col-sm-3 mb-2">
+            <%= f.submit "検索", class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h3 class="text-center">Users List</h3>

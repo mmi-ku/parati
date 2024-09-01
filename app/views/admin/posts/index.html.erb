@@ -1,4 +1,21 @@
 <div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <%= form_with url: admin_posts_path, method: :get do |f| %>
+        <div class="row">
+          <div class="col-sm-6 mb-2">
+            <%= f.search_field :keyword, placeholder: "キーワードで検索", value: params[:keyword], class: "form-control" %>
+          </div>
+          <div class="col-sm-4 mb-2">
+            <%= f.collection_select :genre_id, Genre.all, :id, :name, { include_blank: "-genre select-", selected: params[:genre_id]}, { class: "form-control" } %>
+          </div> 
+          <div class="col-sm-2 mb-2">
+            <%= f.submit "検索", class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h1 class="text-center">All Posts</h1>
@@ -6,11 +23,11 @@
         <% @posts.each do |post| %>
           <tr>
             <th class="col-3">User name</th>
-            <td class="col-9"><%= link_to post.user.name, user_path(post.user) %></td>
+            <td class="col-9"><%= link_to post.user.name, admin_dashboards_path(user_id: post.user.id) %></td>
           </tr>
           <tr>
             <th class="col-3">Image</th>
-            <td class="col-12"><%= link_to  admin_post_post_comments_path(post) do %>
+            <td class="col-12"><%= link_to admin_post_comments_path(post) do %>
               <%= image_tag post.get_image %>
             <% end %></td>
           </tr>

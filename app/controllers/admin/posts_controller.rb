@@ -4,7 +4,15 @@ class Admin::PostsController < ApplicationController
   before_action :set_post, only: [:destroy]
 
   def index
-    @posts = Post.includes(:post_comments).page(params[:page]).per(5)
+    @posts = Post.includes(:post_comments)
+    if params[:post_id].present?
+      @posts = @posts.where(id: params[:post_id])
+    else
+      @posts = @posts.where('title LIKE ?', "%#{params[:keyword]}%").or(
+                 @posts.where('body LIKE ?', "%#{params[:keyword]}%")) if params[:keyword].present?
+      @posts = @posts.where(genre_id: params[:genre_id]) if params[:genre_id].present?
+    end
+    @posts = @posts.page(params[:page]).per(5)
   end
 
   def destroy

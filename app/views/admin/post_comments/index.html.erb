@@ -1,36 +1,54 @@
 <div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <%= form_with url: admin_post_comments_path, method: :get do |f| %>
+        <div class="row">
+          <div class="col-sm-9 mb-2">
+            <%= f.search_field :keyword, placeholder: "キーワードで検索", value: params[:keyword], class: "form-control" %>
+          </div>
+          <div class="col-sm-3 mb-2">
+            <%= f.submit "検索", class: "btn btn-primary btn-block" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h3 class="text-center mt-4">Reviews</h3>
-            <div>
-              <p class="text-center">comments: <%= @post.post_comments.count %></p>
-              <% @post.post_comments.each do |post_comment| %>
-                <ul class="list-group mb-3">
-                  <li class="list-group-item text-center"><%= image_tag post_comment.user.get_profile_image(100,100) %></li>
-                  <li class="list-group-item text-center"><%= post_comment.user.name %></li>
-                  <li class="list-group-item text-center"><%= post_comment.created_at.strftime('%Y/%m/%d') %></li>
-                  <li class="list-group-item text-center"><%= post_comment.comment %></li>
-                  <li class="list-group-item text-center">
-                    <div id="star-rate-<%= post_comment.id %>"></div>
-                    <script>
-                      $('#star-rate-<%= post_comment.id %>').empty();
-                      $('#star-rate-<%= post_comment.id %>').raty({
-                        size: 36,
-                        starOff: '<%= asset_path('star-off.png') %>',
-                        starOn: '<%= asset_path('star-on.png') %>',
-                        half: false,
-                        readOnly: true,
-                        score: <%= post_comment.star %>,
-                      });
-                    </script>
-                  </li>
-                </ul>
-                      <div class="form-group row justify-content-center">
-                        <%= link_to "Delete", admin_post_post_comment_path(@post, post_comment), method: :delete, class: "btn btn-danger btn-block" %>
-                      </div>
-                   
+      <h1 class="text-center">All Posts</h1>
+      <table class="table table-bordered table-borderless">
+        <% @post_comments.each do |post_comment| %>
+          <tr>
+            <th class="col-3">User name</th>
+            <td class="col-9"><%= link_to post_comment.user.name, admin_dashboards_path(user_id: post_comment.user.id) %></td>
+          </tr>
+          <tr>
+            <th class="col-3">Image</th>
+            <td class="col-12">
+              <%= link_to admin_posts_path(post_id: post_comment.post.id) do %>
+                <%= image_tag post_comment.post.get_image %>
               <% end %>
-            </div>
-       </div>
+            </td>
+          </tr>
+          <tr>
+            <th class="col-3">Comments</th>
+            <td class="col-9"><%= post_comment.comment %></td>
+          </tr>
+
+          <tr>
+            <th class="col-3">削除ボタン</th>
+            <td class="col-9">
+              <%= link_to "Delete this post as an Administrator", admin_post_comment_path(post_comment), method: :delete, class: "btn btn-danger btn-block" %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <div class="row justify-content-center">
+        <%= paginate @post_comments %>
+      </div>
+
+    </div>
   </div>
 </div>

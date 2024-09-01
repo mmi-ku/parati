@@ -6,9 +6,9 @@ Rails.application.routes.draw do
 
     namespace :admin do
       resources :genres, only: [:create, :index, :edit, :update, :destroy]
-      resources :posts, only: [:index, :destroy] do
-       resources :post_comments, only: [:index, :destroy]
-      end
+      resources :posts, only: [:index, :destroy]
+      resources :post_comments, only: [:index, :destroy]
+  
       get 'dashboards', to: 'dashboards#index'
       resources :users, only: [] do
         member do
