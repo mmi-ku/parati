@@ -30,7 +30,32 @@
 
           <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-              <% if user_signed_in? %>
+              <% if admin_signed_in? && !user_signed_in? %>
+                <li>
+                <%= link_to admin_post_comments_path, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-out-alt"></i> Post Comments
+                <% end %>
+               </li>
+
+               <li>
+                <%= link_to admin_posts_path, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-out-alt"></i> Posts
+                <% end %>
+               </li>
+
+               <li>
+                <%= link_to admin_dashboards_path, class: 'nav-link text-light' do %>
+                    <i class="fa-solid fa-users"></i> Users
+                <% end %>
+               </li>
+
+               <li>
+                <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
+                    <i class="fas fa-sign-out-alt"></i> Log out
+                <% end %>
+               </li> 
+
+              <% elsif user_signed_in? %>
                 <li class="nav-item">
                   <%= link_to posts_path, class: 'nav-link text-light' do %>
                     <i class="fas fa-home"></i> Home
@@ -76,31 +101,7 @@
                     <% end %>
                   </div>
                 </li>
-
-              <% elsif admin_signed_in? %>
-               <li>
-                <%= link_to admin_post_comments_path, class: 'nav-link text-light' do %>
-                    <i class="fas fa-sign-out-alt"></i> Post Comments
-                <% end %>
-               </li>
-
-               <li>
-                <%= link_to admin_posts_path, class: 'nav-link text-light' do %>
-                    <i class="fas fa-sign-out-alt"></i> Posts
-                <% end %>
-               </li>
-
-               <li>
-                <%= link_to admin_dashboards_path, class: 'nav-link text-light' do %>
-                    <i class="fa-solid fa-users"></i> Users
-                <% end %>
-               </li>
-
-               <li>
-                <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-light' do %>
-                    <i class="fas fa-sign-out-alt"></i> Log out
-                <% end %>
-               </li>
+              
 
               <% else %>
 
@@ -161,3 +162,4 @@
   </footer>
 
 </html>
+

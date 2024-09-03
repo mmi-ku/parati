@@ -21,9 +21,11 @@
           </tr>
         </table>
 
+        <!--マイページを見ているユーザがログインユーザーではない-->
         <% if current_user != @user %>
           <div><%= render "public/relationships/btn", user: @user, options: { class: "" } %></div>
-        <% else %>
+        <!--マイページを見ているユーザがログインユーザーかつゲストではない-->
+        <% elsif current_user.email != "guest@example.com" %>
           <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block my-2" do %>
             <i class="fas fa-user-cog"></i> Edit Profile
           <% end %>

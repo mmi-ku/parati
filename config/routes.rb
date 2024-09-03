@@ -44,6 +44,10 @@ Rails.application.routes.draw do
       	get "followers" => "relationships#followers", as: "followers"
 
     end
+    
+    devise_scope :user do
+      post "users/guest_sign_in", to: "sessions#guest_sign_in"
+    end
 
     resources :posts, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
      resources :post_comments, only: [:create, :edit, :update, :destroy]

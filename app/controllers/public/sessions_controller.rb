@@ -21,6 +21,12 @@ class Public::SessionsController < Devise::SessionsController
       end
     end
   end
+  
+  def guest_sign_in
+    user = User.guest
+    sign_in user
+    redirect_to user_path(user), notice: "Signed in as a guest"
+  end
 
   # protected
 
