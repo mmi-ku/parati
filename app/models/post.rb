@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :user
   belongs_to :genre
   has_many :post_comments, dependent: :destroy
+  has_many :notifications, as: :notifiable, dependent: :destroy
 
 
   validates :image, attached: true, content_type: ['image/png', 'image/jpeg']
@@ -32,5 +33,11 @@ class Post < ApplicationRecord
       @post = Post.all
     end
   end
+  
+  after_create do
+    user.followers.each do |follower|
+      notifications.create(user_id: follower.id)
+    end
+  end  
 
 end

@@ -56,6 +56,8 @@ Rails.application.routes.draw do
     get "search" => "searches#search"
     patch 'withdraw/:id' => 'users#withdraw', as: 'withdraw_user'
     put 'withdraw/:id' => 'users#withdraw'
-
+    
   end
+  
+  resources :notifications, only: [:update]
 end

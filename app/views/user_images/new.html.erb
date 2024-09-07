@@ -1,6 +1,0 @@
-<h1>Post "User Profile"</h1>
-<%= form_with model: @user_image do |f| %>
-  <h4>User Profile Picture</h4>
-  <%= f.file_field :image, accept: "image/*" %>
-  <%= f.submit 'Post' %>
-<% end %>
