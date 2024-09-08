@@ -18,7 +18,7 @@
         </li>
         <li class="list-group-item text-center"><strong>Title:</strong> <%= @post.title %></li>
         <li class="list-group-item text-center"><strong>Caption:</strong> <%= @post.body %></li>
-        <li class="list-group-item text-center"><%= image_tag @post.get_image, class: 'postimage-size'%></li>
+        <li class="list-group-item text-center"><%= image_tag @post.get_image, class: "img-fluid"%></li>
         <li class="list-group-item text-center"><strong>Post Date:</strong> <%= @post.created_at.in_time_zone('Asia/Tokyo').strftime('%Y/%m/%d') %></li>
       </ul>
       <div class="form-group row justify-content-center mt-3">
