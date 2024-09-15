@@ -1,11 +1,13 @@
 class Public:: PostCommentsController < ApplicationController
   before_action :set_post_comment, only: [:edit, :update, :destroy]
-  
+
   def create
     post = Post.find(params[:post_id])
     comment = current_user.post_comments.new(post_comment_params)
     comment.post_id = post.id
-  
+    comment.score = Language.get_data(comment.comment) if comment.comment.present?
+    pp comment.score
+
     if comment.save
       flash[:notice] = 'Your Review is Successfully Shared.'
       redirect_to post_path(post)
@@ -14,11 +16,11 @@ class Public:: PostCommentsController < ApplicationController
       render 'public/posts/show'
     end
   end
-  
+
   def edit
     @post= @post_comment.post
   end
-  
+
   def update
     if @post_comment.update(post_comment_params)
       redirect_to post_path(@post_comment.post), notice: 'Comment was successfully updated.'
@@ -33,7 +35,7 @@ class Public:: PostCommentsController < ApplicationController
   end
 
   private
-  
+
   def set_post_comment
     @post_comment = PostComment.find(params[:id])
   end
