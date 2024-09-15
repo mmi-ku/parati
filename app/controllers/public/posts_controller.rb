@@ -28,6 +28,9 @@ class Public:: PostsController < ApplicationController
      @post = Post.find(params[:id])
      @post_comment = PostComment.new
      @Post_comments =@post.post_comments
+     @post_comments.each do |comment|
+      comment.score = Language.get_data(comment.comment)
+     end
   end
   
   def edit

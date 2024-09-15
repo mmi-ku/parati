@@ -49,7 +49,7 @@ class Public:: UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :user_image)
+    params.require(:user).permit(:name, :profile_image)
   end
   
   def ensure_guest_user

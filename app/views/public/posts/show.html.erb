@@ -27,8 +27,8 @@
           <%= link_to "Delete", post_path(@post), method: :delete, class: "btn btn-danger btn-block" %>
         <% end %>
       </div>
-        
-        
+
+
 
 
       <!--投稿に対するコメントレビュー評価-->
@@ -66,6 +66,15 @@
       </div>
       <!--以下 コメント投稿-->
       <h3 class="text-center mt-4">Post reviews</h3>
+        <% @post_comments.each do |post_comment| %>
+          <% if post_comment.score < -0.8 %>
+            <p class="translatable-text mt-2">
+              <small class="text-secondary">
+                *Detected inappropriate comments. Please reconsider again.*
+              </small>
+            </p>
+          <% end %>
+        <% end %>
       <div>
         <%= form_with model: [@post, @post_comment] do |f| %>
           <div class="form-group row justify-content-center" id="star">
