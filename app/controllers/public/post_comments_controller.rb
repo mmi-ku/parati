@@ -12,6 +12,9 @@ class Public:: PostCommentsController < ApplicationController
       flash[:notice] = 'Your Review is Successfully Shared.'
       redirect_to post_path(post)
     else
+      @post = post
+      @post_comments = post.post_comments
+      @post_comment = comment
       flash.now[:alert] = 'Failed to share the comment.'
       render 'public/posts/show'
     end
