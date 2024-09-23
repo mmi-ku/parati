@@ -24,11 +24,11 @@
 #   ]
 # )
 user_data = [
-  {email: 'olivia@example.com', name: 'Olivia', password: 'password', password_confirmation: 'password'},
-  {email: 'james@example.com', name: 'James', password: 'password', password_confirmation: 'password'},
-  {email: 'lucas@example.com', name: 'Lucas', password: 'password', password_confirmation: 'password'},
-  {email: 'sarah@example.com', name: 'Sarah', password: 'password', password_confirmation: 'password'},
-  {email: 'jone@example.com', name: 'Jone', password: 'password', password_confirmation: 'password'}
+  { email: "olivia@example.com", name: "Olivia", password: "password", password_confirmation: "password" },
+  { email: "james@example.com", name: "James", password: "password", password_confirmation: "password" },
+  { email: "lucas@example.com", name: "Lucas", password: "password", password_confirmation: "password" },
+  { email: "sarah@example.com", name: "Sarah", password: "password", password_confirmation: "password" },
+  { email: "jone@example.com", name: "Jone", password: "password", password_confirmation: "password" }
 ]
 
 user_data.each do |data|
@@ -39,21 +39,21 @@ user_data.each do |data|
   end
 end
 
-genre_names = ['Jeans', 'Blouse', 'T-shirt', 'Skirt', 'Sweater', 'Kimono', 'Cardigan', 'Knitwear', 'Babysuits']
+genre_names = ["Jeans", "Blouse", "T-shirt", "Skirt", "Sweater", "Kimono", "Cardigan", "Knitwear", "Babysuits"]
 genre_names.each do |genre_name|
   Genre.find_or_create_by!(name: genre_name)
 end
 
-genre_id=Genre.find_by(name:'Jeans').id  
+genre_id = Genre.find_by(name: "Jeans").id
 User.all.each do |user|
   post = user.posts.build(
-    title: 'Sample title',
-    body: 'Sample text',
+    title: "Sample title",
+    body: "Sample text",
     genre_id: genre_id
   )
   post.image.attach(
-    io: File.open(Rails.root.join('db/images/no_image_square.jpg')),
-    filename: 'no_image_square.jpg'
+    io: File.open(Rails.root.join("db/images/no_image_square.jpg")),
+    filename: "no_image_square.jpg"
   )
   post.save!
 end
@@ -72,12 +72,12 @@ end
 #   ]
 #   )
 
-  
-  Admin.find_or_create_by!(email: "admin@admin") do |admin|
-    admin.email = "admin@admin"
-    admin.password = "testtest"
-  end
-  
+
+Admin.find_or_create_by!(email: "admin@admin") do |admin|
+  admin.email = "admin@admin"
+  admin.password = "testtest"
+end
+
 #   Admin.create!(
 #   email: 'admin@admin',
 #   password: 'testtest'

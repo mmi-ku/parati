@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Public::SessionsController < Devise::SessionsController
-
   # before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :reject_inactive_user, only: [:create]
 
@@ -17,11 +16,11 @@ class Public::SessionsController < Devise::SessionsController
     @user = User.find_by(email: params[:user][:email])
     if @user
       if @user.valid_password?(params[:user][:password]) && !@user.is_valid
-        redirect_to new_user_session_path, notice: '退会済ユーザーです'
+        redirect_to new_user_session_path, notice: "退会済ユーザーです"
       end
     end
   end
-  
+
   def guest_sign_in
     user = User.guest
     sign_in user
@@ -33,5 +32,4 @@ class Public::SessionsController < Devise::SessionsController
   # def configure_permitted_parameters
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   # end
-
 end

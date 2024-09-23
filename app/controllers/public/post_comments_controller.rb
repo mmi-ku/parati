@@ -9,24 +9,24 @@ class Public:: PostCommentsController < ApplicationController
     pp comment.score
 
     if comment.save
-      flash[:notice] = 'Your Review is Successfully Shared.'
+      flash[:notice] = "Your Review is Successfully Shared."
       redirect_to post_path(post)
     else
       @post = post
       @post_comments = post.post_comments
       @post_comment = comment
-      flash.now[:alert] = 'Failed to share the comment.'
-      render 'public/posts/show'
+      flash.now[:alert] = "Failed to share the comment."
+      render "public/posts/show"
     end
   end
 
   def edit
-    @post= @post_comment.post
+    @post = @post_comment.post
   end
 
   def update
     if @post_comment.update(post_comment_params)
-      redirect_to post_path(@post_comment.post), notice: 'Comment was successfully updated.'
+      redirect_to post_path(@post_comment.post), notice: "Comment was successfully updated."
     else
       render :edit
     end
@@ -34,16 +34,15 @@ class Public:: PostCommentsController < ApplicationController
 
   def destroy
     @post_comment.destroy
-    redirect_to post_path(@post_comment.post), notice: 'Comment was deleted.'
+    redirect_to post_path(@post_comment.post), notice: "Comment was deleted."
   end
 
   private
+    def set_post_comment
+      @post_comment = PostComment.find(params[:id])
+    end
 
-  def set_post_comment
-    @post_comment = PostComment.find(params[:id])
-  end
-
-  def post_comment_params
-    params.require(:post_comment).permit(:comment, :star)
-  end
+    def post_comment_params
+      params.require(:post_comment).permit(:comment, :star)
+    end
 end
