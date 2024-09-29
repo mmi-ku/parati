@@ -9,7 +9,6 @@ class Public:: PostsController < ApplicationController
   end
 
   def create
-    # byebug
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
