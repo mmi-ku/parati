@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe 'Post test', type: :system do
   let!(:user) { create(:user) } 
   let!(:post) { create(:post, title: 'title', body: 'body', user: user) } 
-
+  let!(:genre) { create(:genre, name: 't-shirt') } 
+  
   before do
     sign_in user 
   end
@@ -27,6 +28,9 @@ RSpec.describe 'Post test', type: :system do
       it 'Check the redirect destination after posting' do
         fill_in 'post[title]', with: Faker::Lorem.sentence
         fill_in 'post[body]', with: Faker::Lorem.paragraph
+        image_path = File.join(Rails.root, "/spec/images/files/no_image_square.jpg")
+        attach_file('post[image]', image_path)
+        select "t-shirt", from: "post[genre_id]"
         click_button 'Share' 
         expect(page).to have_current_path post_path(Post.last)
       end

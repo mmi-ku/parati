@@ -3,3 +3,4 @@ FactoryBot.define do
     name { Faker::Book.genre }
   end
 end
+
